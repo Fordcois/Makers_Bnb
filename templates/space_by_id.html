@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>MakersBNB - {{ space.name }}</title>
+    </head>
+    <body>
+        <p>
+            <h1>{{ space.name }}</h1>
+            (<a href="/">Back to Homepage</a>)<br><br>
+            
+            <b>Price Per Night:</b> £{{ space.price_per_night }}<br>
+            <b>Description:</b><br>
+            {{ space.description }}<br>
+            
+            {% if space.host_id == user.id %}
+            <p><b>This is your Property</b><br>
+                {% if unavailable_dates|length == 0 %}
+                You have no current unavailable dates for this property
+                <br>
+                {% else %}
+                You have the following days as unavailable:<br>
+                {% for date in unavailable_dates %}
+                    {{ date.strftime("%B %d %Y")}}<br>
+                {% endfor %}
+                {% endif %}
+                <br>
+                Would you like to add more dates as being unavailable? 
+                <form action="/spaces/{{ space.id }}/unavailable" method="POST">
+                    <label for="unavailable">Enter them in the box below: (format YYYY-MM-DD)<br> Separate each date with a comma</label><br>
+                    <input type="text" name="unavailable" id="unavailable"><br>
+                    <input type="submit" value="Mark dates as unavailable">
+                </form>
+            </p><br><br>
+            {% else %}
+            <b>Viewing availability at {{ space.name }}:</b>
+            <form action="/spaces/{{ space.id }}" method="post">
+                <select name="selected_date">
+                    {% for date in date_list %}
+                        <option value="{{ date }}">{{ date.strftime("%B %d %Y") }}</option>
+                    {% endfor %}
+                </select>
+                <br>
+                Select the date for your stay and hit submit to request a stay<br>
+                <i>(Stays will have to be approved by hosts before they are confirmed)</i><br>
+                <input type="submit" value="Request Stay">
+            </form>
+            {% endif %}
+        </p>
+    </body>
+</html>
