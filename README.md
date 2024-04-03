@@ -36,3 +36,40 @@ Users can easily list their spaces for rent, providing details like space name, 
 - **Database:** PostgreSQL is used for storing user information, space details, and booking requests.
 - **HTML Templates:** Web pages are rendered using HTML templates.
 
+## Project Installation & Set-up
+Before proceeding, ensure you have an active [PostgreSQL server](https://www.postgresql.org/) to store the information.
+
+### Clone Repo
+Clone the Repository  Clone the repository to your local machine:  
+```shell 
+git clone <repository_url> 
+cd <repository_name>
+```
+
+### Install Dependencies and Set up the Virtual Environment
+Install dependencies using pipenv:
+```
+pipenv install
+```
+Activate the virtual environment:
+```
+pipenv shell
+```
+
+### Set up Test and Development Databases
+Create databases for testing and development:
+```shell
+createdb MAKERSBNB 
+createdb MAKERSBNB_test
+```
+
+### Run Tests
+Run tests with extra logging:
+```pytest -sv```
+
+### Run the Web Server
+Start the Flask web server:
+```python app.py```
+
+### Visit the Application
+Open your browser and navigate to [http://localhost:5001](http://localhost:5001) to access the application.
